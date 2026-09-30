@@ -1,0 +1,103 @@
+{
+  "name": "PF - Checkpoint 1 - Base Técnica",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query.chatInput }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "1210419d-e7ca-4bdd-bbb0-e195d73d6e8e",
+      "name": "AI Agent",
+      "executeOnce": true,
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "responsesApiEnabled": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        96,
+        208
+      ],
+      "id": "1a62839f-b056-4f89-8c95-bbd78f0db12b",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "C2IlO7q1NGdGnEEF",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "f035be54-9991-4884-804d-4c42816aa789",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "29a48af8-5b95-4724-9b55-7adfaee831af",
+      "name": "chatInput",
+      "webhookId": "f035be54-9991-4884-804d-4c42816aa789"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "chatInput": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "469f2598-91f1-4ce0-a629-d4614f33b75f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "276bf24e42bbf9b840613d78b914923058862ffd889f8942e1b5214911cfe05d"
+  },
+  "nodeGroups": [],
+  "id": "PYuckCtZTIgDabxG",
+  "tags": []
+}
